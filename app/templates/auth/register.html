@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Register</title>
+  <link rel="stylesheet" href="../../static/styles/auth/style.css" />
+</head>
+
+<body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+  <div class="login-box">
+  <h1>Register</h1>
+    
+    
+    <form id="login_form" method="POST" action="/register">
+    
+    
+      <div class="textbox">
+      <i class="fas fa-user"></i>
+      <input type="text" placeholder="Name" id="name" name="name" required/>
+      </div>
+
+      <div class="textbox">
+      <i class="fas fa-user"></i>
+      <input type="text" placeholder="Username" id="username" name="username" required/>
+      </div>
+
+      <div class="textbox">
+      <i class="fas fa-lock"></i>
+      <input type="password" placeholder="Password" id="password" name="password" required/>
+      </div>
+
+      <div class="textbox">
+      <i class="fab fa-draft2digital"></i>
+      <input type="number" placeholder="Age" id="age" name="age" required/>
+      </div>
+    
+      <div class="textbox">
+      <i class="fas fa-home"></i>
+      <input type="text" placeholder="Address" id="address" name="address" required/>
+      </div>
+    
+      <button type="submit" class="btn">Sign Up</button>
+
+    </form> 
+    <div class="sign-up" style="font-family: sans-serif; font-weight: bold;"><a href="/auth/login"> Already have an account? Sign in.</a></div>
+  
+  </div>
+  <div class="color-overlay"></div>
+
+
+</body>
+
+</html>

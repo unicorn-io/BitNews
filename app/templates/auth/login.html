@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<title>Login</title>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <link rel="stylesheet" href="../../static/styles/auth/style.css">
+</head>
+
+<body>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <div class="login-box">
+    <h1>Login</h1>
+
+    <form id="login_form" method="POST" action="/login">
+
+      <div class="textbox">
+        <i class="fas fa-user"></i>
+        <input id="name" type="text" placeholder="Username" name="name" required>
+      </div>
+
+      <div class="textbox">
+        <i class="fas fa-lock"></i>
+        <input id="password" type="password" placeholder="Password" name="password" required>
+      </div>
+
+      <button type="submit" class="btn">Sign In</button>
+    </form>
+
+    <div class="sign-up" style="font-family: sans-serif; font-weight: bold;"><a href="/auth/register"> Don't have an account?
+        Sign up.</a>
+    </div>
+  </div>
+  <div class="color-overlay"></div>
+
+
+</body>
+
+</html>

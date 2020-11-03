@@ -101,7 +101,7 @@ a{
 }
 
 .btn{
-  width: 100%;
+  width: 50%;
   background: none;
   border: 2px solid #4caf50;
   color: white;
@@ -120,4 +120,8 @@ a{
   width: 80%;
   float: left;
   margin: 0 10px;
+}
+
+.sign-up {
+  width: 70%;
 }

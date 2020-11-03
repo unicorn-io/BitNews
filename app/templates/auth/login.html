@@ -1,3 +1,16 @@
+{% macro render_field(field, placeholder=None) %}
+{% if field.errors %}
+<div>
+{% elif field.flags.error %}
+<div>
+{% else %}
+<div>
+{% endif %}
+    {% set css_class = 'form-control ' + kwargs.pop('class', '') %}
+    {{ field(class=css_class, placeholder=placeholder, **kwargs) }}
+</div>
+{% endmacro %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <title>Login</title>
@@ -6,6 +19,7 @@
   <meta charset="utf-8">
   <title></title>
   <link rel="stylesheet" href="../../static/styles/auth/style.css">
+  
 </head>
 
 <body>
@@ -18,15 +32,24 @@
 
       <div class="textbox">
         <i class="fas fa-user"></i>
-        <input id="name" type="text" placeholder="Username" name="name" required>
+        {{ render_field(form.username, placeholder="Your Email Address",
+        autofocus="") }}
+        
       </div>
 
       <div class="textbox">
         <i class="fas fa-lock"></i>
-        <input id="password" type="password" placeholder="Password" name="password" required>
+        {{ render_field(form.password, placeholder="Password") }}
+
+        
       </div>
 
-      <button type="submit" class="btn">Sign In</button>
+      
+      <button class="g-recaptcha btn" 
+        data-sitekey="6LcAct4ZAAAAAKyemzYr8apIDQBTR4LPx3LmJTc0" 
+        data-callback='onSubmit' 
+        data-action='submit'>Sign In</button>
+
     </form>
 
     <div class="sign-up" style="font-family: sans-serif; font-weight: bold;"><a href="/auth/register"> Don't have an account?
@@ -35,7 +58,15 @@
   </div>
   <div class="color-overlay"></div>
 
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <script>
+    function onSubmit(token) {
+      document.getElementById("login_form").submit();
+    }
+  </script>
 
+ 
 </body>
+
 
 </html>

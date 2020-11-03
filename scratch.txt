@@ -1,0 +1,6 @@
+{
+    "author": "some_author_name",
+    "content": "Some thoughts that author wants to share",
+    "img_url": "some_url",
+    "timestamp": "time at which this was posted"
+}

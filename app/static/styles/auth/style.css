@@ -1,22 +1,22 @@
 @import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
-body{
+body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url(/images/railway.jpg) no-repeat;
+  background: url() no-repeat;
   background-size: cover;
   overflow-x: hidden;
   overflow-y: hidden;
-  max-width : 100%
+  max-width: 100%;
 }
-.login-box{
+.login-box {
   z-index: 1;
   margin-left: 560px;
   margin-top: -50px;
 }
-.after-btn{
+.after-btn {
   display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
 }
 .topnav {
   background-color: #000000;
@@ -41,32 +41,32 @@ body{
 
 /* Add a color to the active/current link */
 .topnav a.active {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
-.color-overlay{
+.color-overlay {
   width: 100vw;
   height: 100vh;
   background: #000;
-  opacity: .65;
+  opacity: 0.65;
   position: absolute;
 }
-.login-box{
+.login-box {
   width: 280px;
   position: absolute;
   top: 50%;
   left: 45%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   color: white;
 }
-.login-box h1{
+.login-box h1 {
   float: left;
   font-size: 40px;
   border-bottom: 6px solid #4caf50;
   margin-bottom: 50px;
   padding: 13px 0;
 }
-.textbox{
+.textbox {
   width: 100%;
   overflow: hidden;
   font-size: 20px;
@@ -74,33 +74,33 @@ body{
   margin: 8px 0;
   border-bottom: 1px solid #4caf50;
 }
-.textbox i{
+.textbox i {
   width: 26px;
   float: left;
   text-align: center;
 }
-.logo{
+.logo {
   background-image: url("/imahe-bg.png");
 }
-a{
+a {
   color: white;
   text-decoration: none;
 }
-.navbar{
+.navbar {
   font-weight: bold;
   font-size: 25px;
   margin-right: 30px;
   margin-top: 18px;
 }
-.btn:hover{
-  background-color:  green;
+.btn:hover {
+  background-color: green;
   text-decoration-color: white;
   border: 1.5px solid;
   padding: 5px;
   margin: 12.5px 0;
 }
 
-.btn{
+.btn {
   width: 50%;
   background: none;
   border: 2px solid #4caf50;
@@ -111,7 +111,7 @@ a{
   margin: 12px 0;
 }
 
-.textbox input{
+.textbox input {
   border: none;
   outline: none;
   background: none;

@@ -15,3 +15,9 @@ def post():
 @main_mod.route('/blog')
 def blog():
     return render_template('blog.html')
+@main_mod.route('/agentIndex')
+def agentIndex():
+    return render_template('agent_index.html')
+@main_mod.route('/auditorIndex')
+def auditorIndex():
+    return render_template('auditor_index.html')

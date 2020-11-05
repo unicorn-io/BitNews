@@ -11,6 +11,7 @@ body {
   max-width: 100%;
   font-family: "Space Grotesk", sans-serif;
 }
+
 .login-box {
   z-index: 1;
   margin-left: 560px;
@@ -96,14 +97,12 @@ a {
 }
 .btn:hover {
   background-color: #a40606;
-  text-decoration-color: white;
-  border: 1.5px solid;
   padding: 5px;
   margin: 12.5px 0;
 }
 
 .btn {
-  width: 50%;
+  width: 70%;
   background: none;
   border: 2px solid #a40606;
   color: white;
@@ -111,6 +110,7 @@ a {
   font-size: 18px;
   cursor: pointer;
   margin: 12px 0;
+  display: inline-block;
 }
 
 .textbox input {

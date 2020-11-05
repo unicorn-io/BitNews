@@ -1,72 +1,71 @@
-{% macro render_field(field, placeholder=None) %}
-{% if field.errors %}
+{% macro render_field(field, placeholder=None) %} {% if field.errors %}
 <div>
-{% elif field.flags.error %}
-<div>
-{% else %}
-<div>
-{% endif %}
-    {% set css_class = 'form-control ' + kwargs.pop('class', '') %}
-    {{ field(class=css_class, placeholder=placeholder, **kwargs) }}
-</div>
-{% endmacro %}
-
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<title>Login</title>
-
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <link rel="stylesheet" href="../../static/styles/auth/style.css">
-  
-</head>
-
-<body>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <div class="login-box">
-    <h1>Login</h1>
-
-    <form id="login_form" method="POST" action="/login">
-
-      <div class="textbox">
-        <i class="fas fa-user"></i>
-        {{ render_field(form.username, placeholder="Your Email Address",
-        autofocus="") }}
-        
-      </div>
-
-      <div class="textbox">
-        <i class="fas fa-lock"></i>
-        {{ render_field(form.password, placeholder="Password") }}
-
-        
-      </div>
-
-      
-      <button class="g-recaptcha btn" 
-        data-sitekey="6LcAct4ZAAAAAKyemzYr8apIDQBTR4LPx3LmJTc0" 
-        data-callback='onSubmit' 
-        data-action='submit'>Sign In</button>
-
-    </form>
-
-    <div class="sign-up" style="font-family: sans-serif; font-weight: bold;"><a href="/auth/register"> Don't have an account?
-        Sign up.</a>
+  {% elif field.flags.error %}
+  <div>
+    {% else %}
+    <div>
+      {% endif %} {% set css_class = 'form-control ' + kwargs.pop('class', '')
+      %} {{ field(class=css_class, placeholder=placeholder, **kwargs) }}
     </div>
+    {% endmacro %}
+
+    <!DOCTYPE html>
+    <html lang="en" dir="ltr">
+      <title>Login</title>
+
+      <head>
+        <meta charset="utf-8" />
+        <title></title>
+        <link rel="stylesheet" href="../../static/styles/auth/style.css" />
+      </head>
+
+      <body>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+
+        <div class="login-box">
+          <h1>Login</h1>
+
+          <form id="login_form" method="POST" action="/login">
+            <div class="textbox">
+              <i class="fas fa-user"></i>
+              {{ render_field(form.username, placeholder="Your Email Address",
+              autofocus="") }}
+            </div>
+
+            <div class="textbox">
+              <i class="fas fa-lock"></i>
+              {{ render_field(form.password, placeholder="Password") }}
+            </div>
+
+            <button
+              class="g-recaptcha btn"
+              data-sitekey="6LcAct4ZAAAAAKyemzYr8apIDQBTR4LPx3LmJTc0"
+              data-callback="onSubmit"
+              data-action="submit"
+            >
+              Sign In
+            </button>
+          </form>
+
+          <div
+            class="sign-up"
+            style="font-family: sans-serif; font-weight: bold"
+          >
+            <a href="/auth/register"> Don't have an account? Sign up.</a>
+          </div>
+        </div>
+        <div class="color-overlay"></div>
+
+        <!-- <script src="https://www.google.com/recaptcha/api.js"></script> -->
+        <script>
+          function onSubmit(token) {
+            document.getElementById("login_form").submit();
+          }
+        </script>
+      </body>
+    </html>
   </div>
-  <div class="color-overlay"></div>
-
-  <script src="https://www.google.com/recaptcha/api.js"></script>
-  <script>
-    function onSubmit(token) {
-      document.getElementById("login_form").submit();
-    }
-  </script>
-
- 
-</body>
-
-
-</html>
+</div>

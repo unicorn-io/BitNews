@@ -8,6 +8,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 # Import the database object from the main app module
 from app import db
 
+## Import the login and registeration form for users and agent
+
+from app.auth_module.forms import UserRegistrationForm,AgentRegistrationForm,UserLoginForm,AgentLoginForm
+
 # Import module forms
 from app.auth_module.forms import LoginForm
 
@@ -36,3 +40,26 @@ def signin():
 @auth_module.route("/register/", methods=['GET', 'POST'])
 def register():
     return render_template("auth/register.html")
+
+
+@auth_module.route("/register/",methods=['GET','POST'])
+def userRegister():
+    form=UserRegistrationForm()
+    return render_template('auth/register.html',form)
+
+@auth_module.route("/register/",methods=['GET','POST'])
+def agentRegister():
+    form=AgentRegistrationForm()
+    return render_template('auth/regsister.html',form)
+
+@auth_module.route("/login/",methods=['GET','POST'])
+def userLogin():
+    form=UserLoginForm()
+    return render_template('auth/login.html',form)
+
+@auth_module.route("/login/",methods=['GET','POST'])
+def agentLogin():
+    form=AgentLoginForm()
+    return render_template('auth/login.html',form)
+
+

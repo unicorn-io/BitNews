@@ -54,7 +54,7 @@ def registerUser():
         if user found then redirect back to signup page so user can try again
         '''
         flash('Email address already exists.')
-        return redirect(url_for('auth.signup'))
+        return render_template("auth/login.html",form=form)
 
     new_user= User(email=email,name=name,password=generate_password_hash(password,method='sha256'),role,status)
 
@@ -75,7 +75,7 @@ def registerAgent():
 
     if user:
         flash('Email address already exists.')
-        return redirect(url_for('auth.signup'))
+        return render_template("auth/login.html",form=form)
 
     new_user= User(email=email,name=name,password=generate_password_hash(password,method='sha256')) 
 

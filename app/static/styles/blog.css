@@ -145,6 +145,19 @@ section {
   position: relative;
   box-sizing: border-box;
 }
+
+form {
+  display: inline-block;
+}
+
+.butt {
+  margin-left: 20rem;
+}
+.btn {
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
+
 .clear {
   clear: both;
 }

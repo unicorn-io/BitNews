@@ -21,3 +21,6 @@ def agentIndex():
 @main_mod.route('/auditorIndex')
 def auditorIndex():
     return render_template('auditor_index.html')
+@main_mod.route('./procedure')
+def procedure():
+    return render_template('procedure.html')

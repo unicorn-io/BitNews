@@ -2,6 +2,8 @@
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for
 
+from flask_login import LoginManager
+
 # Import password / encryption helper tools
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -10,14 +12,15 @@ from app import db
 
 ## Import the login and registeration form for users and agent
 
-from app.auth_module.forms import UserRegistrationForm,AgentRegistrationForm,UserLoginForm,AgentLoginForm
+# from app.auth_module.forms import UserRegistrationForm,AgentRegistrationForm,UserLoginForm,AgentLoginForm
 
 # Import module forms
-from app.auth_module.forms import LoginForm
+from app.auth_module.forms import LoginForm ,RegisterForm 
 
 # Import module models (i.e. User)
 from app.auth_module.models import User
 from app.auth_module.models import Editor
+
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 auth_module = Blueprint('auth', __name__, url_prefix='/auth')
@@ -39,27 +42,9 @@ def signin():
 
 @auth_module.route("/register/", methods=['GET', 'POST'])
 def register():
-    return render_template("auth/register.html")
+    form = RegisterForm(request.form)
+    if form.validate_on_submit():
+        user= User.query.get(email=form.email.data).first()
+        password= User.
 
-
-@auth_module.route("/register/",methods=['GET','POST'])
-def userRegister():
-    form=UserRegistrationForm()
-    return render_template('auth/register.html',form)
-
-@auth_module.route("/register/",methods=['GET','POST'])
-def agentRegister():
-    form=AgentRegistrationForm()
-    return render_template('auth/regsister.html',form)
-
-@auth_module.route("/login/",methods=['GET','POST'])
-def userLogin():
-    form=UserLoginForm()
-    return render_template('auth/login.html',form)
-
-@auth_module.route("/login/",methods=['GET','POST'])
-def agentLogin():
-    form=AgentLoginForm()
-    return render_template('auth/login.html',form)
-
-
+    return render_template("auth/register.html",form=form)

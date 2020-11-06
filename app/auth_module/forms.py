@@ -1,73 +1,21 @@
 # Import Form and RecaptchaField
 from flask_wtf import FlaskForm, RecaptchaField
 from wtforms import TextField, PasswordField, BooleanField ,StringField,SubmitField
-from wtforms.validators import Required , Email, EqualTo,Length ,DataRequired
+from wtforms.validators import DataRequired , Email, EqualTo,Length
 
 # define the login form (WTFforms)
 
 class LoginForm(FlaskForm):
-    username = TextField('Username', [Email(), Required(message='Forgot your username?')])
-    password = PasswordField("Password", [Required(message='Must provide a password. ;-)')])
+    username = TextField('Username', [Email(), DataRequired(message='Forgot your username?')])
+    password = PasswordField("Password", [DataRequired(message='Must provide a password. ;-)')])
     
-
-class UserRegistrationForm(FlaskForm):
-    username=StringField('Username',
-    validators=[DataRequired(),Length(min=4,max=25)])
-
-    email = StringField('Email',
-    validators=[DataRequired(),Email()])
-
-    password = PasswordField('Password',
-    validators=[DataRequired()])
-
-    confirm_password= PasswordField('Confirm Password'
-    ,validators=[DataRequired(),EqualTo('password')])
-
-    role=StringField('Role',
-    validators=[DataRequired()])
-
-    status=StringField('Status',
-    validators=[DataRequired()])
-
-    submit=SubmitField('Sign Up User')
+class RegisterForm(FlaskForm):
+    username =TextField('Username',[DataRequired(message='Enter username')])
+    email=StringField("Email",[DataRequired(message="Enter a email"),Email()])
+    password =PasswordField("Password",[DataRequired(message='Enter a password')])
+    role=StringField('Role')
+    status=StringField('Status')
 
 
-class AgentRegistrationForm(FlaskForm):
-    username=StringField('Username',
-    validators=[DataRequired(),Length(min=4,max=25)])
-
-    email = StringField('Email',
-    validators=[DataRequired(),Email()])
-
-    password = PasswordField('Password',
-    validators=[DataRequired()])
-
-    confirm_password= PasswordField('Confirm Password'
-    ,validators=[DataRequired(),EqualTo('password')])
-
-    submit=SubmitField('Sign Up Agent')
-
-
-class UserLoginForm(FlaskForm):
-    email = StringField('Email',
-    validators=[DataRequired(),Email()])
-
-    password = PasswordField('Password',
-    validators=[DataRequired()])
-
-    remember = BooleanField('Remember')
     
-    submit=SubmitField('Log In User')
-
-
-class AgentLoginForm(FlaskForm):
     
-    email = StringField('Email',
-    validators=[DataRequired(),Email()])
-
-    password = PasswordField('Password',
-    validators=[DataRequired()])
-
-    remember = BooleanField('Remember')
-    
-    submit=SubmitField('Log In Agent')     

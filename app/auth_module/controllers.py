@@ -2,7 +2,6 @@
 from flask import Blueprint, request, render_template, \
                   flash, g, session, redirect, url_for
 
-from flask_login import LoginManager
 
 # Import password / encryption helper tools
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -15,7 +14,7 @@ from app import db
 # from app.auth_module.forms import UserRegistrationForm,AgentRegistrationForm,UserLoginForm,AgentLoginForm
 
 # Import module forms
-from app.auth_module.forms import LoginForm ,RegisterForm 
+from app.auth_module.forms import LoginForm ,RegisterFormAgent,RegisterFormUser
 
 # Import module models (i.e. User)
 from app.auth_module.models import User
@@ -41,10 +40,47 @@ def signin():
     return render_template("auth/login.html", form=form)
 
 @auth_module.route("/register/", methods=['GET', 'POST'])
-def register():
-    form = RegisterForm(request.form)
-    if form.validate_on_submit():
-        user= User.query.get(email=form.email.data).first()
-        password= User.
+def registerUser():
+    form =RegisterFormUser(form)
+    email=request.form.get('email')
+    name= request.form.get('name')
+    password=request.form.get('password')
+    role=request.form.get('role')
+    status=request.form.get('status')
+    user= User.query.filter_by(email=email).first()
 
-    return render_template("auth/register.html",form=form)
+    if user:
+        '''
+        if user found then redirect back to signup page so user can try again
+        '''
+        flash('Email address already exists.')
+        return redirect(url_for('auth.signup'))
+
+    new_user= User(email=email,name=name,password=generate_password_hash(password,method='sha256'),role,status)
+
+    ##add new user to the database 
+    db.session.add(new_user)
+    db.session.commit()
+
+    return redirect(url_for('auth.login'))
+
+@auth_module.route("/register/",methods=['GET','POST'])
+def registerAgent():
+    form = RegisterFormAgent(form)
+    email=request.form.get('email')
+    name= request.form.get('name')
+    password=request.form.get('password')
+
+    user= User.query.filter_by(email=email).first()
+
+    if user:
+        flash('Email address already exists.')
+        return redirect(url_for('auth.signup'))
+
+    new_user= User(email=email,name=name,password=generate_password_hash(password,method='sha256')) 
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    return redirect(url_for('auth.login'))
+

@@ -8,8 +8,34 @@ bit_system = Blueprint('bit', __name__, url_prefix="/process")
 CONNECTED_NODE_ADDRESS="http://127.0.0.1:5000"
 
 posts=[]
+pos_dict = {}
 peers = set()
 blockchain = Blockchain()
+
+# Flask's way of declaring end-points
+@app.route('/new_transaction', methods=['POST'])
+def new_transaction():
+    tx_data = request.get_json()
+    required_fields = ["author", "content"]
+
+    for field in required_fields:
+        if not tx_data.get(field):
+            return "Invalid transaction data", 404
+
+    tx_data["timestamp"] = time.time()
+
+    blockchain.add_new_transaction(tx_data)
+
+    return "Success", 201
+
+
+@app.route('/chain', methods=['GET'])
+def get_chain():
+    chain_data = []
+    for block in blockchain.chain:
+        chain_data.append(block.__dict__)
+    return json.dumps({"length": len(chain_data),
+                       "chain": chain_data})
 
 # Endpoint to add new peers to the network
 @app.route('/register_node', methods=['POST'])
@@ -160,6 +186,10 @@ def mine_unconfirmed_transactions():
         return "Block #{} is mined.".format(blockchain.last_block.index)
 
 
+@app.route('/pending_tx')
+def get_pending_tx():
+    return json.dumps(blockchain.unconfirmed_transactions)
+
 
 
 @bit_system.route('/post', methods=['POST'])
@@ -182,4 +212,13 @@ def publish():
     
     hash = upload_json(objString)
     
+    hash_obj_gen = {
+        'Hash': hash
+    }
+    
+    new_tx_address = "{}/process/new_transaction".format(CONNECTED_NODE_ADDRESS)
+
+    request.post(new_tx_address,
+                    json=hash_obj_gen,
+                    headers = {'Content'})
 

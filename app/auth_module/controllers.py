@@ -13,6 +13,7 @@ from app.auth_module.forms import LoginForm
 
 # Import module models (i.e. User)
 from app.auth_module.models import User
+from app.auth_module.models import Editor
 
 # Define the blueprint: 'auth', set its url prefix: app.url/auth
 auth_module = Blueprint('auth', __name__, url_prefix='/auth')

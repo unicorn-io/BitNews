@@ -62,7 +62,7 @@ def registerUser():
     db.session.add(new_user)
     db.session.commit()
 
-    return redirect(url_for('auth.login'))
+    return render_template("auth/register.html",form=form)
 
 @auth_module.route("/register/",methods=['GET','POST'])
 def registerAgent():
@@ -82,5 +82,5 @@ def registerAgent():
     db.session.add(new_user)
     db.session.commit()
 
-    return redirect(url_for('auth.login'))
+    return render_template("auth/register.html",form=form)
 

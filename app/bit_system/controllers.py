@@ -249,11 +249,11 @@ def publish():
 
 @bit_system.route('/blog')
 def blog():
-    with open("blog_data.html", 'w') as blg:
-        for hashh in pos_lis:
-            blg_data = get_json(hashh)
-            print(blg_data)
-            blg.write(get_blog_html(blg_data, hashh))
+    # with open("blog_data.html", 'w') as blg:
+    #     for hashh in pos_lis:
+    #         blg_data = get_json(hashh)
+    #         print(blg_data)
+    #         blg.write(get_blog_html(blg_data, hashh))
     return render_template('blog.html', post_content=open("blog_data.html", 'r').read())
 
 def get_blog_html(article, hash):

@@ -5,7 +5,7 @@ def upload_json(json_object):
     json_object = {'file':json_object}
     newHeaders = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     response = requests.post('http://127.0.0.1:5001/api/v0/add', files=json_object)
-    print(response.json())
+    return response.json()['Hash']
 
 def get_json(json_hash):
     params = (('arg', json_hash),)

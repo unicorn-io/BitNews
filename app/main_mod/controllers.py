@@ -6,21 +6,30 @@ main_mod = Blueprint('main', __name__, url_prefix="/")
 @main_mod.route('/')
 def index():
     return render_template('index.html')
+
 @main_mod.route('/contact')
 def contact():
     return render_template('contact.html')
+
 @main_mod.route('/post')
 def post():
     return render_template('regular.html')
+
 @main_mod.route('/blog')
 def blog():
     return render_template('blog.html')
+
 @main_mod.route('/agentIndex')
 def agentIndex():
     return render_template('agent_index.html')
+
 @main_mod.route('/auditorIndex')
 def auditorIndex():
     return render_template('auditor_index.html')
 @main_mod.route('./procedure')
 def procedure():
     return render_template('procedure.html')
+
+@main_mod.route('/new-post')
+def agentPost():
+    return render_template('agent_post.html')

@@ -3,7 +3,7 @@ from .ipfs import *
 from .main import *
 from app.bit_system.models import Contracts
 
-bit_system = Blueprint('bit', __name__, url_prefix="/process")
+bit_system = Blueprint('process', __name__, url_prefix="/process")
 
 CONNECTED_NODE_ADDRESS="http://127.0.0.1:5000"
 
@@ -11,12 +11,13 @@ posts=[]
 pos_dict = {}
 peers = set()
 blockchain = Blockchain()
+total_population = 10
 
 # Flask's way of declaring end-points
-@app.route('/new_transaction', methods=['POST'])
+@bit_system.route('/new_transaction', methods=['POST'])
 def new_transaction():
     tx_data = request.get_json()
-    required_fields = ["author", "content"]
+    required_fields = ["Hash"]
 
     for field in required_fields:
         if not tx_data.get(field):
@@ -29,7 +30,7 @@ def new_transaction():
     return "Success", 201
 
 
-@app.route('/chain', methods=['GET'])
+@bit_system.route('/chain', methods=['GET'])
 def get_chain():
     chain_data = []
     for block in blockchain.chain:
@@ -38,7 +39,7 @@ def get_chain():
                        "chain": chain_data})
 
 # Endpoint to add new peers to the network
-@app.route('/register_node', methods=['POST'])
+@bit_system.route('/register_node', methods=['POST'])
 def register_new_peers():
     # The host address of the peer node.
     node_address = request.get_json()['node_address']
@@ -50,7 +51,7 @@ def register_new_peers():
     # Syncing the block chain with the newly created node.
     return get_chain()
 
-@app.route('/register_with', methods=['POST'])
+@bit_system.route('/register_with', methods=['POST'])
 def register_with_existing_node():
     """
     Internally calls the `register_node` endpoint to
@@ -184,15 +185,22 @@ def mine_unconfirmed_transactions():
             # announce the recently mined block to the network
             announce_new_block(blockchain.last_block)
         return "Block #{} is mined.".format(blockchain.last_block.index)
+    
 
-
-@app.route('/pending_tx')
+@bit_system.route('/pending_tx')
 def get_pending_tx():
     return json.dumps(blockchain.unconfirmed_transactions)
 
+@bit_system.route('/post/approve')
+def approve():
+    hash = request.args.get('q')
+    pos_dict[hash][0] += 1
+    if (float(pos_dict[hash][0]/total_population) >= 0.8):
+        #add the news to the blockchain
+        pass
+    return "success", 200
 
-
-@bit_system.route('/post', methods=['POST'])
+@bit_system.route('/post', methods=['GET','POST'])
 def publish():
     title = request.form.get('title')
     content = request.form.get('content')
@@ -200,25 +208,29 @@ def publish():
     urlToImage = request.form.get('urlToImage')
     subject = request.form.get('subject')
 
-    objString = '''
-    {
-        'title': {title},
-        'subject': {subject},
-        'content': {content},
-        'url': {url},
-        'urlToImage': {urlToImage},
+    objString = {
+        "title": title,
+        "subject": subject,
+        "content": content,
+        "url": url,
+        "urlToImage": urlToImage,
     }
-    '''.format(title=title, subject=subject, content=content, url=url, urlToImage=urlToImage)
     
-    hash = upload_json(objString)
+    
+    hash = upload_json(json.dumps(objString))
     
     hash_obj_gen = {
         'Hash': hash
     }
-    
-    new_tx_address = "{}/process/new_transaction".format(CONNECTED_NODE_ADDRESS)
+    print(hash_obj_gen)
 
-    request.post(new_tx_address,
-                    json=hash_obj_gen,
-                    headers = {'Content'})
+    pos_dict[hash] = [0,0] # upvotes, downvotes
+    
+  #  new_tx_address = "{}/process/new_transaction".format(CONNECTED_NODE_ADDRESS)
+
+   # request.post(new_tx_address, json=hash_obj_gen,headers = {'Content'})
+
+    return "added to the chain" #render_the_new_post and add it to the blog
+    
+
 

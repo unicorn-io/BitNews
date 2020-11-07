@@ -1,0 +1,21 @@
+
+    <div class="post_content">
+                <div class="post_body">
+                  <h1> None </h1>
+                  <p class="post_p">
+                    None
+                  </p>
+                  
+                  <span>Hash -- QmVrHjLzfXzNrGwzBqAESABuqkiSSCDpHg4ZXAo1cfaHoj</span>
+                  <span class="butt"></span>
+                    <form action="/process/approve?q=QmVrHjLzfXzNrGwzBqAESABuqkiSSCDpHg4ZXAo1cfaHoj">
+                      <button class="btn btn-success">Approve</button>
+                    </form>
+                    <form action="/process/disapprove?q=QmVrHjLzfXzNrGwzBqAESABuqkiSSCDpHg4ZXAo1cfaHoj">
+                      <button class="btn btn-danger">Disapprove</button>
+                    </form>
+                    <form action="/view-post?q=QmVrHjLzfXzNrGwzBqAESABuqkiSSCDpHg4ZXAo1cfaHoj"><button class="btn btn-dark">Post</button></form>
+                  </span>
+                </div>
+              </div>
+              

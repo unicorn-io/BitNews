@@ -136,48 +136,21 @@
             <div class="col-lg-10 offset-lg-1">
               <div class="post_content">
                 <!-- Post Body -->
-                <h1>Heading</h1>
+                <h1>{{ title }}</h1>
                 <div class="post_body">
                   <p class="post_p">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Fusce enim nulla, mollis eu metus in, sagittis fringilla
-                    tortor. Phasellus eget purus id felis dignissim convallis.
-                    Suspendisse et augue dui. Morbi gravida sed justo vel
-                    venenatis. Ut tempor pretium maximus. Donec libero diam,
-                    faucibus vitae lectus nec, accumsan gravida dui. Nam
-                    interdum mi eget lacus aliquet, sit amet ultricies magna
-                    pharetra. In ut odio a ligula egestas pretium et quis
-                    sapien. Etiam faucibus magna eu porta vulputate. Aliquam
-                    euismod rhoncus malesuada. Nunc rutrum hendrerit semper.
+                    {{ content }}
                   </p>
-                  <p class="post_p">
-                    Maecenas vitae sem varius, imperdiet nisi a, tristique nisi.
-                    Sed scelerisque suscipit leo cursus accumsan. Donec vel
-                    turpis quam. Mauris non nisl nec nunc gravida ullamcorper id
-                    vestibulum magna. Donec non velit finibus, laoreet arcu nec,
-                    facilisis augue. Aliquam sed purus id erat accumsan congue.
-                    Mauris semper ullamcorper nibh non pellentesque. Aenean
-                    euismod purus sit amet quam vehicula ornare.
-                  </p>
-                  <p class="post_p">
-                    Donec orci dolor, pretium in luctus id, consequat vitae
-                    nibh. Quisque hendrerit, lorem sit amet mollis malesuada,
-                    urna orci volutpat ex, sed scelerisque nunc velit et massa.
-                    Sed maximus id erat vel feugiat. Phasellus bibendum nisi non
-                    urna bibendum elementum. Aenean tincidunt nibh vitae ex
-                    facilisis ultrices. Integer ornare efficitur ultrices.
-                    Integer neque lectus, venenatis at pulvinar quis, aliquet id
-                    neque. Mauris ultrices consequat velit, sed dignissim elit
-                    posuere in. Cras vitae dictum dui.
-                  </p>
-                  <a href="#">URL to image</a>
+                  
+                  <a href="#">URL to image: {{ urlToImage }}</a>
+                  <a href="#">To Url: {{ url }}</a>
                 </div>
               </div>
             </div>
           </div>
           <div class="approve-btn">
-            <button class="btn btn-success butt">Approve</button>
-            <button class="btn btn-danger butt">Disapprove</button>
+            <form action="/process/post/approve?q={{ hash }}"><button class="btn btn-success butt">Approve</button></form>
+            <form action="/process/post/disapprove?q={{ hash }}"><button class="btn btn-danger butt">Disapprove</button></form>
           </div>
           <div class="hash-code">
             <!-- <input
@@ -187,7 +160,7 @@
             />
             <button type="button" class="btn btn-dark butt">Hash Code</button> -->
             <h3>Hash Code for the post</h3>
-            <p>Hash CODE</p>
+            <p>{{ hash }}</p>
           </div>
         </div>
       </div>

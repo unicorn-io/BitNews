@@ -1,5 +1,6 @@
 # Import Flask dependencies
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
+from .ipfs import *
 
 main_mod = Blueprint('main', __name__, url_prefix="/")
 
@@ -15,10 +16,6 @@ def contact():
 def post():
     return render_template('regular.html')
 
-@main_mod.route('/blog')
-def blog():
-    return render_template('blog.html')
-
 @main_mod.route('/agentIndex')
 def agentIndex():
     return render_template('agent_index.html')
@@ -26,6 +23,7 @@ def agentIndex():
 @main_mod.route('/auditorIndex')
 def auditorIndex():
     return render_template('auditor_index.html')
+    
 @main_mod.route('./procedure')
 def procedure():
     return render_template('procedure.html')
@@ -33,3 +31,9 @@ def procedure():
 @main_mod.route('/new-post')
 def agentPost():
     return render_template('agent_post.html')
+
+@main_mod.route('/view-post', methods=["GET"])
+def view_post():
+    hash = request.args.get('q')
+    data = get_json(hash)
+    return render_template('regular.html', title=data['title'],content=data['content'], url=data['url'], urlToImage=data['urlToImage'], hash=hash)

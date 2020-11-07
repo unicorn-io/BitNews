@@ -1,6 +1,7 @@
 # Import Flask dependencies
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
 from .ipfs import *
+from .news import *
 
 main_mod = Blueprint('main', __name__, url_prefix="/")
 
@@ -35,5 +36,7 @@ def agentPost():
 @main_mod.route('/view-post', methods=["GET"])
 def view_post():
     hash = request.args.get('q')
+    real = request.args.get('real')
+    real = 'Real' if real != 1 else 'Not Decided'
     data = get_json(hash)
-    return render_template('regular.html', title=data['title'],content=data['content'], url=data['url'], urlToImage=data['urlToImage'], hash=hash)
+    return render_template('regular.html', title=data['title'],content=data['content'], url=data['url'], urlToImage=data['urlToImage'], hash=hash, real=real)

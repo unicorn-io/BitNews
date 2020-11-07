@@ -1,3 +1,9 @@
+---
+noteId: "a4b293f0210211eb9800418121b1b313"
+tags: []
+
+---
+
 # BitNews  :full_moon:
 This is a web application for a news ecosystem written in flask-python. It further uses gunicorn as the WSGI interface to make it production ready.
 

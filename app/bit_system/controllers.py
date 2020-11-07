@@ -1,6 +1,7 @@
 from flask import Blueprint, request, render_template, flash, g, session, redirect, url_for
 from .ipfs import *
 from .main import *
+from .news import *
 from app.bit_system.models import Contracts
 
 bit_system = Blueprint('process', __name__, url_prefix="/process")
@@ -8,8 +9,10 @@ bit_system = Blueprint('process', __name__, url_prefix="/process")
 CONNECTED_NODE_ADDRESS="http://127.0.0.1:5000"
 
 posts=[]
-pos_dict = {'Qmd3BudeA9F5BSNQUy4H2ECGYj4V82TriHuCEDEBQZdcga':[0,0], "QmVrHjLzfXzNrGwzBqAESABuqkiSSCDpHg4ZXAo1cfaHoj": [0,0]}
-pos_lis = ["QmVrHjLzfXzNrGwzBqAESABuqkiSSCDpHg4ZXAo1cfaHoj"]
+pos_dict = {'QmfSJCG7sqbbJrha2XbhyDgDJdnPbQgAwwFJc4BBhHnZTW': [4, 0], 'QmTc7Sqn3Ltce1P8jN1qjAN38C9NVcd7yetBdF4ZLwbi5n': [4, 0], 'QmQHoda8AH1L9HX2qhPjgD6SYfhVovy7Pzz6g1Hf6ow5Hd': [4, 0], 'QmVtvtWmh5eWtnEzHiArketEfK9K66uS3UbE8wnrr19gxR': [4, 0], 'QmbPrG7uZBQf262k4FMm5J6785gUGasegVyDBimj3FRr83': [4, 0], 'QmbYPbUqH8Lb3jF9yX71s1QvwZh24zcQMTSmMhHyPs7RF8': [4, 0], 'QmPVgEnWSgbqMxsE23sh5voGQJN8x2GHjU1Hg8GrrQ3FoZ': [4, 0], 'QmcEBd8BkNeUXh3dhwLixMcL9Ku2knD4zwBsr561TcA825': [4, 0], 'QmaBJin8favo3D6Tn61dySjdAPpVy1UsA5WugQCtSmq1wE': [4, 0], 'QmZJsBT75upJKMQAHPe5mm3woYTHTJv69ibAqNWnbCKPXP': [4, 0], 'QmdXWF7rKJsho267T6yy3HcmYhxPjQGu5BUH2ZTv2uDcdi': [4, 0], 'QmVJrsLdvZxKufeMCqJ3MQayfi6JgPdHioJWdwu4vf6Ls5': [4, 0], 'Qma49NApCJ2DSueZw5Bdm1CYkzNxeVTm3Z7HHUbfEacFEu': [4, 0]}
+pos_lis = ['QmfSJCG7sqbbJrha2XbhyDgDJdnPbQgAwwFJc4BBhHnZTW', 'QmTc7Sqn3Ltce1P8jN1qjAN38C9NVcd7yetBdF4ZLwbi5n', 'QmQHoda8AH1L9HX2qhPjgD6SYfhVovy7Pzz6g1Hf6ow5Hd', 'QmVtvtWmh5eWtnEzHiArketEfK9K66uS3UbE8wnrr19gxR', 'QmbPrG7uZBQf262k4FMm5J6785gUGasegVyDBimj3FRr83', 'QmbYPbUqH8Lb3jF9yX71s1QvwZh24zcQMTSmMhHyPs7RF8', 'QmPVgEnWSgbqMxsE23sh5voGQJN8x2GHjU1Hg8GrrQ3FoZ', 'QmcEBd8BkNeUXh3dhwLixMcL9Ku2knD4zwBsr561TcA825', 'QmaBJin8favo3D6Tn61dySjdAPpVy1UsA5WugQCtSmq1wE', 'QmZJsBT75upJKMQAHPe5mm3woYTHTJv69ibAqNWnbCKPXP', 'QmdXWF7rKJsho267T6yy3HcmYhxPjQGu5BUH2ZTv2uDcdi', 'QmVJrsLdvZxKufeMCqJ3MQayfi6JgPdHioJWdwu4vf6Ls5', 'Qma49NApCJ2DSueZw5Bdm1CYkzNxeVTm3Z7HHUbfEacFEu']
+#pos_dict = {}
+#pos_lis = []
 peers = set()
 parsed_keys=[]
 blockchain = Blockchain()
@@ -217,9 +220,9 @@ def disapprove():
 def check_chain():
     hash = request.args.get('q')
     if (parsed_keys.count(hash) > 0):
-        return redirect('/view-post?q='+hash)
+        return redirect('/view-post?q='+hash+"&real=1")
     else: 
-        return redirect('/')
+        return redirect('/view-post?q='+hash+"&real=2")
 
 
 @bit_system.route('/post', methods=['GET','POST'])
@@ -258,15 +261,15 @@ def publish():
     # request.post(new_tx_address, json=hash_obj_gen,headers = {'Content'})
 
     
-    
+
 
 @bit_system.route('/blog')
 def blog():
-    # with open("blog_data.html", 'w') as blg:
-    #     for hashh in pos_lis:
-    #         blg_data = get_json(hashh)
-    #         print(blg_data)
-    #         blg.write(get_blog_html(blg_data, hashh))
+    with open("blog_data.html", 'w') as blg:
+        for hashh in pos_lis:
+            blg_data = get_json(hashh)
+            print(blg_data)
+            blg.write(get_blog_html(blg_data, hashh))
     return render_template('blog.html', post_content=open("blog_data.html", 'r').read())
 
 def get_blog_html(article,   hash):

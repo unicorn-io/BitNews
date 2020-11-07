@@ -2,6 +2,7 @@ import requests
 import json
 import re
 import string
+#from .news import *
 
 def upload_json(json_object):
     json_object = {'file':json_object}
@@ -11,7 +12,18 @@ def upload_json(json_object):
 
 def get_json(json_hash):
     response = requests.get("http://localhost:8080/ipfs/"+json_hash )
-    return json.loads(response.text)
+    print(response.text)
+    return response.json()
 
 def get_url(hash):
     return "localhost:8080/ipfs/"+hash
+
+if __name__=="__main__":
+    dic = {}
+    lis = []
+    for obj in a:
+        k = upload_json(json.dumps(obj))
+        dic[k] = [0,0]
+        lis.append(k)
+    print(dic)
+    print(lis)

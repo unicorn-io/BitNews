@@ -8,9 +8,10 @@ bit_system = Blueprint('process', __name__, url_prefix="/process")
 CONNECTED_NODE_ADDRESS="http://127.0.0.1:5000"
 
 posts=[]
-pos_dict = {'Qmd3BudeA9F5BSNQUy4H2ECGYj4V82TriHuCEDEBQZdcga':[0,0]}
+pos_dict = {'Qmd3BudeA9F5BSNQUy4H2ECGYj4V82TriHuCEDEBQZdcga':[0,0], "QmVrHjLzfXzNrGwzBqAESABuqkiSSCDpHg4ZXAo1cfaHoj": [0,0]}
 pos_lis = ["QmVrHjLzfXzNrGwzBqAESABuqkiSSCDpHg4ZXAo1cfaHoj"]
 peers = set()
+parsed_keys=[]
 blockchain = Blockchain()
 total_population = 5
 
@@ -192,23 +193,34 @@ def mine_unconfirmed_transactions():
 def get_pending_tx():
     return json.dumps(blockchain.unconfirmed_transactions)
 
-@bit_system.route('/post/approve')
+@bit_system.route('/approve')
 def approve():  
     hash = request.args.get('q')
     pos_dict[hash][0] += 1
-    #if (float(pos_dict[hash][0]/total_population) >= 0.8):
+    if (float(pos_dict[hash][0]/total_population) >= 0.8):
         #add the news to the blockchain
-    redirect("/process/add_block?q="+hash)
+        print("Add to the chain")
+        parsed_keys.append(hash)
+        redirect("/process/add_block?q="+hash)
     print(len(blockchain.chain))
-    return "success", 200
+    return redirect("/process/blog")
 
-@bit_system.route('/post/disapprove')
+@bit_system.route('/disapprove')
 def disapprove():
     hash = request.args.get('q')
-    pos_dict[hash][1] += 1
+    pos_dict[hash][1] += 1  
     if (float(pos_dict[hash][1]/total_population) >= 0.6):
         pass #remove the post from consideration
     return "success", 200
+
+@bit_system.route("/verify")
+def check_chain():
+    hash = request.args.get('q')
+    if (parsed_keys.count(hash) > 0):
+        return redirect('/view-post?q='+hash)
+    else: 
+        return redirect('/')
+
 
 @bit_system.route('/post', methods=['GET','POST'])
 def publish():
@@ -236,15 +248,16 @@ def publish():
 
     pos_dict[hash] = [0,0] # upvotes, downvotes
     pos_lis.insert(0,hash)
+    print(pos_lis)
     # TODO : Append the machine learning model value here.
     
-    redirect('/process/view-post?q='+hash)
+    return redirect('/view-post?q='+hash)
     
     # new_tx_address = "{}/process/new_transaction".format(CONNECTED_NODE_ADDRESS)
 
     # request.post(new_tx_address, json=hash_obj_gen,headers = {'Content'})
 
-    return "added to the chain" #render_the_new_post and add it to the blog
+    
     
 
 @bit_system.route('/blog')
@@ -256,7 +269,7 @@ def blog():
     #         blg.write(get_blog_html(blg_data, hashh))
     return render_template('blog.html', post_content=open("blog_data.html", 'r').read())
 
-def get_blog_html(article, hash):
+def get_blog_html(article,   hash):
     return '''<div class="post_content">
                 <div class="post_body">
                   <h1> {title} </h1>

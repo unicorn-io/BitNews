@@ -264,12 +264,14 @@
                     class="section_panel d-flex flex-row align-items-center justify-content-start"
                   >
                     <div class="section_title">What's Trending</div>
-                    <input
+                    <form action="/process/verify" method="GET">
+                     <input
                         type="text"
                         placeholder="Check Hash Code"
+                        name="q"
                         class="hash-label"
                     />
-                      <button type="button" class="btn btn-dark butt">Verify Code</button>
+                      <button type="button" class="btn btn-dark butt">Verify Code</button></form>
                     <!-- <div class="section_tags ml-auto">
                       <ul>
                         <li class="active"><a href="category.html">all</a></li>

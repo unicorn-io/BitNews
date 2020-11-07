@@ -103,6 +103,7 @@
                             type="text"
                             id="input-username"
                             class="form-control form-control-alternative"
+                            name="title"
                             placeholder="Heading"
                             value=""
                           />
@@ -122,6 +123,7 @@
                             id="input-first-name"
                             class="form-control form-control-alternative"
                             placeholder="Subject"
+                            name="subject"
                             value="Subject"
                           />
                         </div>
@@ -132,7 +134,12 @@
                   </div>
                   <hr class="my-4" />
                   <!-- Address -->
+<<<<<<< Updated upstream
                   <h6 class="heading-small text-muted mb-4" style="margin-left: 1rem;">URLs</h6>
+=======
+                  <div class="card-body">
+                    <h6 class="heading-small text-muted mb-4">URLs</h6>
+>>>>>>> Stashed changes
                   <div class="pl-lg-4">
                     <div class="row">
                       <div class="col-md-12">
@@ -145,15 +152,29 @@
                             class="form-control form-control-alternative"
                             placeholder="Image URL"
                             value=""
+                            name="urlToImage"
                             type="text"
                           />
+                          <label class="form-control-label" for="input-address"
+                          >URL</label
+                        >
+                        <input
+                          id="input-address"
+                          class="form-control form-control-alternative"
+                          placeholder="URL"
+                          value=""
+                          name="url"
+                          type="text"
+                        />
                         </div>
                       </div>
                     </div>
                   </div>
+                  </div>
                   <hr class="my-4" />
                   <!-- Description -->
-                  <h6 class="heading-small text-muted mb-4" style="margin-left: 1rem;">
+                  <div class="card-body">
+                  <h6 class="heading-small text-muted mb-4">
                     Tell us more about the news..
                   </h6>
                   <div class="pl-lg-4">
@@ -163,12 +184,13 @@
                         rows="4"
                         class="form-control form-control-alternative"
                         placeholder="A few words about you ..."
+                        name="content"
                       >
     Enter news article here</textarea
                       >
                     </div>
                   </div>
-                  <input type='submit' placeholder="submit"/ style="margin-bottom: 1rem;">
+                  <input type='submit' placeholder="submit" style="margin-bottom: 1rem;" value="Post News" />
                 </form>
               </div>
             </div>

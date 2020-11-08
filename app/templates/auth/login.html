@@ -28,7 +28,7 @@
         <div class="login-box">
           <h1>Login</h1>
 
-          <form id="login_form" method="POST" action="/login">
+          <form id="login_form" method="POST" action="#">
             <div class="textbox">
               <i class="fas fa-user"></i>
               {{ render_field(form.username, placeholder="Your Email Address",
@@ -40,22 +40,12 @@
               {{ render_field(form.password, placeholder="Password") }}
             </div>
 
-            <button
-              class="g-recaptcha btn"
-              data-sitekey="6LcAct4ZAAAAAKyemzYr8apIDQBTR4LPx3LmJTc0"
-              data-callback="onSubmit"
-              data-action="submit"
-            >
+            <a href="/login_auditor"><button>
               Sign In as Auditor
-            </button>
-            <button
-              class="g-recaptcha btn"
-              data-sitekey="6LcAct4ZAAAAAKyemzYr8apIDQBTR4LPx3LmJTc0"
-              data-callback="onSubmit"
-              data-action="submit"
-            >
+            </button></a>
+            <a href='/login_editor'><button>
               Sign In as Agent
-            </button>
+            </button></a>
           </form>
 
           <div

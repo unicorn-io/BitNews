@@ -56,12 +56,12 @@
                 <div class="logo"><a href="/">Bitnews</a></div>
                 <nav class="main_nav">
                   <ul>
-                    <li class="active">
+                    <li>
                       <a href="/">Home</a>
                     </li>
                     <li><a href="/process/blog">Blog</a></li>
-                    <li><a href="./contact">Contact</a></li>
-                    <li><a href="./auth/login">Login/Register</a></li>
+                    <li  class="active"><a href="#">Post</a></li>
+                    <li><a href="/contact">Contact</a></li>
                   </ul>
                 </nav>
                 <div class="hamburger ml-auto menu_mm">
@@ -87,7 +87,7 @@
             <div></div>
           </div>
         </div>
-        <div class="logo menu_mm"><a href="./static/#">Bitnews</a></div>
+        <div class="logo menu_mm"><a href="/">Bitnews</a></div>
         <div class="search">
           <form action="#">
             <input
@@ -142,8 +142,8 @@
                     {{ content }}
                   </p>
                   
-                  <a href="#">URL to image: {{ urlToImage }}</a>
-                  <a href="#">To Url: {{ url }}</a>
+                  <a href="{{ urlToImage }}">URL to image</a><br> 
+                  <a href="{{ url }}">To Url</a>
                   
                 </div>
                 {{ real }}
@@ -174,16 +174,16 @@
           <div class="row row-lg-eq-height">
             <div class="col-lg-9 order-lg-1 order-2">
               <div class="footer_content">
-                <div class="footer_logo"><a href="./static/#">Bitnews</a></div>
+                <div class="footer_logo"><a href="/">Bitnews</a></div>
                 <div class="footer_social">
                   <ul>
                     <li class="footer_social_facebook">
-                      <a href="./static/#"
+                      <a href="#"
                         ><i class="fa fa-facebook" aria-hidden="true"></i
                       ></a>
                     </li>
                     <li class="footer_social_instagram">
-                      <a href="./static/#"
+                      <a href="#"
                         ><i class="fa fa-instagram" aria-hidden="true"></i
                       ></a>
                     </li>

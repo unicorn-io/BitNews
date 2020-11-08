@@ -8,7 +8,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../static/styles/profile.css" />
-    <title>News Posting</title>
+    <title>User Profile</title>
   </head>
   <body>
     <div class="main-content">
@@ -23,7 +23,7 @@
             class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
             href="#"
             target="_blank"
-            >Posting Area</a
+            >User profile</a
           >
           <!-- Form -->
           <!-- User -->
@@ -38,11 +38,16 @@
                 aria-expanded="false"
               >
                 <div class="media align-items-center">
-                  
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img
+                      alt="Image placeholder"
+                      src="https://demos.creative-tim.com/argon-dashboard/assets/img/theme/team-4.jpg"
+                    />
+                  </span>
                   <div class="media-body ml-2 d-none d-lg-block">
-                    <a href="/login_editor"><span class="mb-0 text-sm font-weight-bold"
-                      >home</span
-                    ></a>
+                    <span class="mb-0 text-sm font-weight-bold"
+                      >Username Here</span
+                    >
                   </div>
                 </div>
               </a>
@@ -55,7 +60,7 @@
         class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center"
         style="
           min-height: 600px;
-          background-image: url(../static/images/BitcoinNews.jpg);
+          background-image: url(https://raw.githack.com/creativetimofficial/argon-dashboard/master/assets/img/theme/profile-cover.jpg);
           background-size: cover;
           background-position: center top;
         "
@@ -68,8 +73,8 @@
             <div class="col-lg-7 col-md-10">
               <h1 class="display-2 text-white">Hello User</h1>
               <p class="text-white mt-0 mb-5">
-                This is your posting page. Here you can post different kinds of
-                news you came across..
+                This is your profile page. You can see the progress you've made
+                with your work and manage your projects or assigned tasks
               </p>
             </div>
           </div>
@@ -83,29 +88,41 @@
               <div class="card-header bg-white border-0">
                 <div class="row align-items-center">
                   <div class="col-8">
-                    <h3 class="mb-0">Post your article here...</h3>
+                    <h3 class="mb-0">My account</h3>
                   </div>
                 </div>
               </div>
               <div class="card-body">
-                <form action="/process/post" method="POST">
+                <form>
                   <h6 class="heading-small text-muted mb-4">
-                    Article Information
+                    User information
                   </h6>
                   <div class="pl-lg-4">
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group focused">
                           <label class="form-control-label" for="input-username"
-                            >Heading</label
+                            >Username</label
                           >
                           <input
                             type="text"
                             id="input-username"
                             class="form-control form-control-alternative"
-                            name="title"
-                            placeholder="Heading"
+                            placeholder="Username"
                             value=""
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-email"
+                            >Email address</label
+                          >
+                          <input
+                            type="email"
+                            id="input-email"
+                            class="form-control form-control-alternative"
+                            placeholder=""
                           />
                         </div>
                       </div>
@@ -116,77 +133,116 @@
                           <label
                             class="form-control-label"
                             for="input-first-name"
-                            >Subject</label
+                            >First name</label
                           >
                           <input
                             type="text"
                             id="input-first-name"
                             class="form-control form-control-alternative"
-                            placeholder="Subject"
-                            name="subject"
-                            value="Subject"
+                            placeholder="First name"
+                            value=""
                           />
                         </div>
                       </div>
-                     
+                      <div class="col-lg-6">
+                        <div class="form-group focused">
+                          <label
+                            class="form-control-label"
+                            for="input-last-name"
+                            >Last name</label
+                          >
+                          <input
+                            type="text"
+                            id="input-last-name"
+                            class="form-control form-control-alternative"
+                            placeholder="Last name"
+                            value=""
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                   <hr class="my-4" />
                   <!-- Address -->
-                  <div class="card-body">
-                    <h6 class="heading-small text-muted mb-4">URLs</h6>
+                  <h6 class="heading-small text-muted mb-4">
+                    Contact information
+                  </h6>
                   <div class="pl-lg-4">
                     <div class="row">
                       <div class="col-md-12">
                         <div class="form-group focused">
                           <label class="form-control-label" for="input-address"
-                            >Image URL</label
+                            >Address</label
                           >
                           <input
                             id="input-address"
                             class="form-control form-control-alternative"
-                            placeholder="Image URL"
+                            placeholder="Home Address"
                             value=""
-                            name="urlToImage"
                             type="text"
                           />
-                          <label class="form-control-label" for="input-address"
-                          >URL</label
-                        >
-                        <input
-                          id="input-address"
-                          class="form-control form-control-alternative"
-                          placeholder="URL"
-                          value=""
-                          name="url"
-                          type="text"
-                        />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="input-city"
+                            >City</label
+                          >
+                          <input
+                            type="text"
+                            id="input-city"
+                            class="form-control form-control-alternative"
+                            placeholder="City"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group focused">
+                          <label class="form-control-label" for="input-country"
+                            >Country</label
+                          >
+                          <input
+                            type="text"
+                            id="input-country"
+                            class="form-control form-control-alternative"
+                            placeholder="Country"
+                            value=""
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-country"
+                            >Postal code</label
+                          >
+                          <input
+                            type="number"
+                            id="input-postal-code"
+                            class="form-control form-control-alternative"
+                            placeholder="Postal code"
+                          />
                         </div>
                       </div>
                     </div>
                   </div>
-                  </div>
                   <hr class="my-4" />
                   <!-- Description -->
-                  <div class="card-body">
-                  <h6 class="heading-small text-muted mb-4">
-                    Tell us more about the news..
-                  </h6>
+                  <h6 class="heading-small text-muted mb-4">About me</h6>
                   <div class="pl-lg-4">
                     <div class="form-group focused">
-                      <label>News in Brief..</label>
+                      <label>About Me</label>
                       <textarea
                         rows="4"
                         class="form-control form-control-alternative"
                         placeholder="A few words about you ..."
-                        name="content"
                       >
-    Enter news article here</textarea
+    Tell us about yourself</textarea
                       >
                     </div>
                   </div>
-                  <input type='submit' placeholder="submit" style="margin-bottom: 1rem;" value="Post News" />
                 </form>
               </div>
             </div>

@@ -1,6 +1,6 @@
 # Import Form and RecaptchaField
 from flask_wtf import FlaskForm, RecaptchaField
-from wtforms import TextField, PasswordField, BooleanField ,StringField,SubmitField
+from wtforms import TextField, PasswordField, BooleanField ,StringField,SubmitField, IntegerField
 from wtforms.validators import Required , Email, EqualTo,Length ,DataRequired
 
 #form email field 
@@ -25,13 +25,12 @@ class UserRegistrationForm(FlaskForm):
     confirm_password= PasswordField('Confirm Password'
     ,validators=[DataRequired(),EqualTo('password')])
 
-    role=StringField('Role',
-    validators=[DataRequired()])
+    name = StringField('name')
+    Age = IntegerField("age")
+    address = StringField("address")
+    country = StringField("country")
 
-    status=StringField('Status',
-    validators=[DataRequired()])
-
-    submit=SubmitField('Sign Up User')
+    submit=SubmitField('Sign Up Auditor')
 
 
 class AgentRegistrationForm(FlaskForm):
@@ -46,6 +45,11 @@ class AgentRegistrationForm(FlaskForm):
 
     confirm_password= PasswordField('Confirm Password'
     ,validators=[DataRequired(),EqualTo('password')])
+
+    name = StringField('name')
+    Age = IntegerField("age")
+    address = StringField("address")
+    country = StringField("country")
 
     submit=SubmitField('Sign Up Agent')
 

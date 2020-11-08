@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, flash, g, session, redire
 from .ipfs import *
 from .main import *
 from .news import *
+from .tagging import *
 from app.bit_system.models import Contracts
 
 bit_system = Blueprint('process', __name__, url_prefix="/process")
@@ -9,12 +10,12 @@ bit_system = Blueprint('process', __name__, url_prefix="/process")
 CONNECTED_NODE_ADDRESS="http://127.0.0.1:5000"
 
 posts=[]
-pos_dict = {'QmfSJCG7sqbbJrha2XbhyDgDJdnPbQgAwwFJc4BBhHnZTW': [4, 0], 'QmTc7Sqn3Ltce1P8jN1qjAN38C9NVcd7yetBdF4ZLwbi5n': [4, 0], 'QmQHoda8AH1L9HX2qhPjgD6SYfhVovy7Pzz6g1Hf6ow5Hd': [4, 0], 'QmVtvtWmh5eWtnEzHiArketEfK9K66uS3UbE8wnrr19gxR': [4, 0], 'QmbPrG7uZBQf262k4FMm5J6785gUGasegVyDBimj3FRr83': [4, 0], 'QmbYPbUqH8Lb3jF9yX71s1QvwZh24zcQMTSmMhHyPs7RF8': [4, 0], 'QmPVgEnWSgbqMxsE23sh5voGQJN8x2GHjU1Hg8GrrQ3FoZ': [4, 0], 'QmcEBd8BkNeUXh3dhwLixMcL9Ku2knD4zwBsr561TcA825': [4, 0], 'QmaBJin8favo3D6Tn61dySjdAPpVy1UsA5WugQCtSmq1wE': [4, 0], 'QmZJsBT75upJKMQAHPe5mm3woYTHTJv69ibAqNWnbCKPXP': [4, 0], 'QmdXWF7rKJsho267T6yy3HcmYhxPjQGu5BUH2ZTv2uDcdi': [4, 0], 'QmVJrsLdvZxKufeMCqJ3MQayfi6JgPdHioJWdwu4vf6Ls5': [4, 0], 'Qma49NApCJ2DSueZw5Bdm1CYkzNxeVTm3Z7HHUbfEacFEu': [4, 0]}
+pos_dict = {'QmfSJCG7sqbbJrha2XbhyDgDJdnPbQgAwwFJc4BBhHnZTW': [4, 0, 0, "127.0.0.1"], 'QmTc7Sqn3Ltce1P8jN1qjAN38C9NVcd7yetBdF4ZLwbi5n': [4, 0, 0, "127.0.0.1"], 'QmQHoda8AH1L9HX2qhPjgD6SYfhVovy7Pzz6g1Hf6ow5Hd': [4, 0, 0, "127.0.0.1"], 'QmVtvtWmh5eWtnEzHiArketEfK9K66uS3UbE8wnrr19gxR': [4, 0, 0, "127.0.0.1"], 'QmbPrG7uZBQf262k4FMm5J6785gUGasegVyDBimj3FRr83': [4, 0, 0, "127.0.0.1"], 'QmbYPbUqH8Lb3jF9yX71s1QvwZh24zcQMTSmMhHyPs7RF8': [4, 0, 0, "127.0.0.1"], 'QmPVgEnWSgbqMxsE23sh5voGQJN8x2GHjU1Hg8GrrQ3FoZ': [4, 0, 0, "127.0.0.1"], 'QmcEBd8BkNeUXh3dhwLixMcL9Ku2knD4zwBsr561TcA825': [4, 0, 0, "127.0.0.1"], 'QmaBJin8favo3D6Tn61dySjdAPpVy1UsA5WugQCtSmq1wE': [4, 0, 0, "127.0.0.1"], 'QmZJsBT75upJKMQAHPe5mm3woYTHTJv69ibAqNWnbCKPXP': [4, 0, 0, "127.0.0.1"], 'QmdXWF7rKJsho267T6yy3HcmYhxPjQGu5BUH2ZTv2uDcdi': [4, 0, 0, "127.0.0.1"], 'QmVJrsLdvZxKufeMCqJ3MQayfi6JgPdHioJWdwu4vf6Ls5': [4, 0, 0, "127.0.0.1"], 'Qma49NApCJ2DSueZw5Bdm1CYkzNxeVTm3Z7HHUbfEacFEu': [4, 0, 0, "127.0.0.1"]}
 pos_lis = ['QmfSJCG7sqbbJrha2XbhyDgDJdnPbQgAwwFJc4BBhHnZTW', 'QmTc7Sqn3Ltce1P8jN1qjAN38C9NVcd7yetBdF4ZLwbi5n', 'QmQHoda8AH1L9HX2qhPjgD6SYfhVovy7Pzz6g1Hf6ow5Hd', 'QmVtvtWmh5eWtnEzHiArketEfK9K66uS3UbE8wnrr19gxR', 'QmbPrG7uZBQf262k4FMm5J6785gUGasegVyDBimj3FRr83', 'QmbYPbUqH8Lb3jF9yX71s1QvwZh24zcQMTSmMhHyPs7RF8', 'QmPVgEnWSgbqMxsE23sh5voGQJN8x2GHjU1Hg8GrrQ3FoZ', 'QmcEBd8BkNeUXh3dhwLixMcL9Ku2knD4zwBsr561TcA825', 'QmaBJin8favo3D6Tn61dySjdAPpVy1UsA5WugQCtSmq1wE', 'QmZJsBT75upJKMQAHPe5mm3woYTHTJv69ibAqNWnbCKPXP', 'QmdXWF7rKJsho267T6yy3HcmYhxPjQGu5BUH2ZTv2uDcdi', 'QmVJrsLdvZxKufeMCqJ3MQayfi6JgPdHioJWdwu4vf6Ls5', 'Qma49NApCJ2DSueZw5Bdm1CYkzNxeVTm3Z7HHUbfEacFEu']
 #pos_dict = {}
 #pos_lis = []
 peers = set()
-parsed_keys=[]
+parsed_keys=['QmfSJCG7sqbbJrha2XbhyDgDJdnPbQgAwwFJc4BBhHnZTW', 'QmTc7Sqn3Ltce1P8jN1qjAN38C9NVcd7yetBdF4ZLwbi5n', 'QmQHoda8AH1L9HX2qhPjgD6SYfhVovy7Pzz6g1Hf6ow5Hd', 'QmVtvtWmh5eWtnEzHiArketEfK9K66uS3UbE8wnrr19gxR', 'QmbPrG7uZBQf262k4FMm5J6785gUGasegVyDBimj3FRr83', 'QmbYPbUqH8Lb3jF9yX71s1QvwZh24zcQMTSmMhHyPs7RF8', 'QmPVgEnWSgbqMxsE23sh5voGQJN8x2GHjU1Hg8GrrQ3FoZ', 'QmcEBd8BkNeUXh3dhwLixMcL9Ku2knD4zwBsr561TcA825', 'QmaBJin8favo3D6Tn61dySjdAPpVy1UsA5WugQCtSmq1wE', 'QmZJsBT75upJKMQAHPe5mm3woYTHTJv69ibAqNWnbCKPXP', 'QmdXWF7rKJsho267T6yy3HcmYhxPjQGu5BUH2ZTv2uDcdi', 'QmVJrsLdvZxKufeMCqJ3MQayfi6JgPdHioJWdwu4vf6Ls5', 'Qma49NApCJ2DSueZw5Bdm1CYkzNxeVTm3Z7HHUbfEacFEu']
 blockchain = Blockchain()
 total_population = 5
 
@@ -25,7 +26,7 @@ def new_transaction():
     required_fields = ["Hash"]
 
     for field in required_fields:
-        if not tx_data.get(field):
+        if not tx_data.get(field):  
             return "Invalid transaction data", 404
 
     tx_data["timestamp"] = time.time()
@@ -199,7 +200,15 @@ def get_pending_tx():
 @bit_system.route('/approve')
 def approve():  
     hash = request.args.get('q')
-    pos_dict[hash][0] += 1
+    ip = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
+    try:
+        dist = dist_bw_ip(ip, pos_dict[hash][2])
+    except:
+        dist = 40000
+    if (dist>40000):
+        pos_dict[hash][0] += 1
+    else:
+        pos_dict[hash][0] += 4
     if (float(pos_dict[hash][0]/total_population) >= 0.8):
         #add the news to the blockchain
         print("Add to the chain")
@@ -249,7 +258,8 @@ def publish():
     }
     print(hash_obj_gen)
 
-    pos_dict[hash] = [0,0] # upvotes, downvotes
+    pos_dict[hash] = [0,0,0,request.environ.get('HTTP_X_REAL_IP', request.remote_addr)] # upvotes, downvotes
+    print(pos_dict[hash])
     pos_lis.insert(0,hash)
     print(pos_lis)
     # TODO : Append the machine learning model value here.
@@ -288,3 +298,18 @@ def get_blog_html(article,   hash):
                   </span>
                 </div>
               </div>'''.format(title=article['title'], content=article['content'], hash=hash)
+
+@bit_system.route("/geo_tag")
+def geo_tag():
+    return render_template("tag.html")
+
+@bit_system.route("/tagger", methods=['POST'])
+def calc_tag():
+    ip1 = request.form.get('ip1')
+    ip2 = request.form.get('ip2')
+    distance = dist_bw_ip(ip1, ip2)
+    print(distance)
+    [a, b] = get_lat_long(ip1)
+    [c, d] = get_lat_long(ip2)
+    get_plot_html([float(a), float(c)], [float(b), float(d)])
+    return render_template('tag.html', datt=distance, mapp=open("map.html", 'r').read())

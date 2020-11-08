@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Bitnews</title>
+    <title>Geo Tagging</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
       type="text/css"
-      href="./static/styles/bootstrap4/bootstrap.min.css"
+      href="../static/styles/bootstrap4/bootstrap.min.css"
     />
     <link
-      href="./static/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
+      href="../static/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
       type="text/css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="./static/plugins/OwlCarousel2-2.2.1/owl.carousel.css"
+      href="../static/plugins/OwlCarousel2-2.2.1/owl.carousel.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="./static/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"
+      href="../static/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="./static/plugins/OwlCarousel2-2.2.1/animate.css"
+      href="../static/plugins/OwlCarousel2-2.2.1/animate.css"
     />
     <link
       rel="stylesheet"
       type="text/css"
-      href="./static/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css"
+      href="../static/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css"
     />
-    <link rel="stylesheet" type="text/css" href="./static/styles/contact.css" />
+    <link rel="stylesheet" type="text/css" href="../static/styles/regular.css" />
     <link
       rel="stylesheet"
       type="text/css"
-      href="./static/styles/contact_responsive.css"
+      href="../static/styles/regular_responsive.css"
     />
   </head>
   <body>
@@ -53,13 +53,15 @@
               <div
                 class="header_content d-flex flex-row align-items-center justify-content-start"
               >
-                <div class="logo"><a href="#">Bitnews</a></div>
+                <div class="logo"><a href="/">Bitnews</a></div>
                 <nav class="main_nav">
                   <ul>
-                    <li><a href="/">Home</a></li>
+                    <li>
+                      <a href="/">Home</a>
+                    </li>
                     <li><a href="/process/blog">Blog</a></li>
-                    <li><a href="/auth/login">Login/Register</a></li>
-                    <li class="active"><a href="#">Contact</a></li>
+                    <li  class="active"><a href="#">Tag</a></li>
+                    <li><a href="/contact">Contact</a></li>
                   </ul>
                 </nav>
                 <div class="hamburger ml-auto menu_mm">
@@ -85,7 +87,7 @@
             <div></div>
           </div>
         </div>
-        <div class="logo menu_mm"><a href="#">Bitnews</a></div>
+        <div class="logo menu_mm"><a href="/">Bitnews</a></div>
         <div class="search">
           <form action="#">
             <input
@@ -96,68 +98,76 @@
             />
             <img
               class="header_search_icon menu_mm"
-              src="./static/images/search_2.png"
+              src="../static/images/search_2.png"
               alt=""
             />
           </form>
         </div>
+        <!-- <nav class="menu_nav">
+          <ul class="menu_mm">
+            <li class="menu_mm"><a href="./static/index.html">home</a></li>
+            <li class="menu_mm"><a href="./static/#">Fashion</a></li>
+            <li class="menu_mm"><a href="./static/#">Gadgets</a></li>
+            <li class="menu_mm"><a href="./static/#">Lifestyle</a></li>
+            <li class="menu_mm"><a href="./static/#">Video</a></li>
+            <li class="menu_mm"><a href="./static/contact.html">Contact</a></li>
+          </ul>
+        </nav> -->
       </div>
 
       <!-- Home -->
-    
+
       <div class="home">
         <div
           class="home_background parallax-window"
           data-parallax="scroll"
-          data-image-src="./static/images/regular.jpg"
+          data-image-src="../static/images/regular.jpg"
           data-speed="0.8"
         ></div>
-        <div class="home_content">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 offset-lg-3">
-                <!-- Post Comment -->
-                <h1 class="contact">Contact Us</h1>
-                <div class="post_comment">
-                  <div class="contact_form_container">
-                    <form action="#">
-                      <input
-                        type="text"
-                        class="contact_input contact_input_name"
-                        placeholder="Your Name"
-                        required="required"
-                      />
-                      <input
-                        type="email"
-                        class="contact_input contact_input_email"
-                        placeholder="Your Email"
-                        required="required"
-                      />
-                      <textarea
-                        class="contact_text"
-                        placeholder="Your Message"
-                        required="required"
-                      ></textarea>
-                      <button type="submit" class="contact_button">
-                        Send Message
-                      </button>
-                    </form>
-                  </div>
+      </div>
+
+      <!-- Page Content -->
+
+      <div class="page_content">
+        <div class="container">
+          <div class="row">
+            <!-- Post Content -->
+
+            <div class="col-lg-10 offset-lg-1">
+              <div class="post_content">
+                <!-- Post Body -->
+                <h1>IP Taging</h1>
+                <div class="post_body">
+                  <p class="post_p">
+                    
+                  </p>
+                  <form action='/process/tagger' method="post">
+                    <input type="text" name="ip1" />
+                    <input type="text" name="ip2" />
+                    <button type="submit" name="submit" value="get_results">Get Results</button>
+                  </form>
+                  
+                 <h3>Distance: {{ distt }}</h3>
+                 <div>{{ mapp }}</div>
+                 
                 </div>
+                
               </div>
             </div>
           </div>
+        
+      
         </div>
       </div>
 
       <!-- Footer -->
 
       <footer class="footer">
-        <div class="container" style="margin-left: 19rem;">
+        <div class="container">
           <div class="row row-lg-eq-height">
             <div class="col-lg-9 order-lg-1 order-2">
               <div class="footer_content">
-                <div class="footer_logo"><a href="#">Bitnews</a></div>
+                <div class="footer_logo"><a href="/">Bitnews</a></div>
                 <div class="footer_social">
                   <ul>
                     <li class="footer_social_facebook">
@@ -177,25 +187,24 @@
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
-                  All rights reserved | This website is made with
+                  All rights reserved | This template is made with
                   <i class="fa fa-heart-o" aria-hidden="true"></i> by
                   <a href="#" target="_blank">__init__</a>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 order-lg-2 order-1">
           </div>
         </div>
       </footer>
     </div>
 
-    <script src="./static/js/jquery-3.2.1.min.js"></script>
-    <script src="./static/styles/bootstrap4/popper.js"></script>
-    <script src="./static/styles/bootstrap4/bootstrap.min.js"></script>
-    <script src="./static/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="./static/plugins/easing/easing.js"></script>
-    <script src="./static/plugins/masonry/masonry.js"></script>
-    <script src="./static/plugins/parallax-js-master/parallax.min.js"></script>
-    <script src="./static/js/contact.js"></script>
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
+    <script src="../static/styles/bootstrap4/popper.js"></script>
+    <script src="../static/styles/bootstrap4/bootstrap.min.js"></script>
+    <script src="../static/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="../static/plugins/easing/easing.js"></script>
+    <script src="../static/plugins/masonry/masonry.js"></script>
+    <script src="../static/plugins/parallax-js-master/parallax.min.js"></script>
+    <script src="../static/js/regular.js"></script>
   </body>
 </html>
